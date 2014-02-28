@@ -1,0 +1,22 @@
+<h1><%= @link.title %></h1>
+
+<br>
+
+<%= @link.url %>
+<br>
+<%= @link.description %>
+<br>
+
+<%= render 'add_comment', parent_comment_id: nil %>
+
+<ul>
+<% @link.comments.each do |comment| %>
+  <% if comment.parent_comment_id.nil? %>
+  <li>
+    <%= render 'comment',
+    comment: comment,
+    comments_by_parent_id: Comment.comments_by_parent_id %>
+  </li>
+  <% end %>
+<% end %>
+</ul>

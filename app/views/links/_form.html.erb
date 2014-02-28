@@ -1,0 +1,34 @@
+<% action = (link.persisted? ? link_url(link) : links_url) %>
+
+<form action="<%= action %>" method="post" accept-charset="utf-8">
+
+  <% if link.persisted?%>
+  <input type="hidden" name="_method" value="PATCH">
+  <%end%>
+
+  <input name="authenticity_token"
+  type="hidden"
+  value= "<%= form_authenticity_token %>">
+
+  <label>Title:
+  <input type="text"
+  name="link[title]"></label><br>
+
+  <label>Url:
+  <input type="text"
+  name="link[url]"></label><br>
+
+  <label>Descriptions (optional):
+  <input type="text"
+  name="link[description]"></label><br>
+
+
+  <label> <h3>Subs</h3>
+    <% Sub.all.each do |sub| %>
+      <input type="checkbox" name="link[sub_ids][]"
+      value="<%=sub.id%>"><%= sub.title %><br>
+    <% end %>
+  </label>
+
+  <p><input type="submit"></p>
+</form>

@@ -1,0 +1,13 @@
+<h1>FRONT PAGE OF LOCALHOST</h1>
+
+<ul>
+  <% Link.all.sort{ |l1, l2| l2.count_upvotes <=> l1.count_upvotes }.each do |link| %>
+
+  <li>
+    <%= link_to link.title, link_url(link) %>
+    <%= button_to "↑", link_upvote_url(link) %>
+    <%= button_to "↓", link_downvote_url(link) %>
+    <%= link.count_upvotes %>
+  </li>
+  <% end %>
+</ul>
